@@ -8,10 +8,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float yRange = 5f;
 
     [SerializeField] float positionPitchFactor = 3f;
-    [SerializeField] float controlPitchFactor = -15f;
-    [SerializeField] float controlRollFactor = -12f;
-    [SerializeField] float controlYawFactor = -5f;
+    [SerializeField] float positionYawFactor = 3f;
+    [SerializeField] float controlPitchFactor = 15f;
+    [SerializeField] float controlRollFactor = 2f;
+    [SerializeField] float controlYawFactor = 5f;
+    [SerializeField] float rotationFactor = 3f;
 
+    [SerializeField] GameObject[] lasers;
 
     float xThrow, yThrow;
 
@@ -22,15 +25,42 @@ public class PlayerMovement : MonoBehaviour
 
         HandleMovement();
         HandleRotation();
+        HandleLasers();
     }
-     
+
+    void HandleLasers()
+    {
+        if (Input.GetButton("Fire1"))
+        {
+            SetLasersActive(true);
+        }
+        else
+        {
+            SetLasersActive(false);
+        }
+    }
+
+    void SetLasersActive(bool state)
+    {
+        foreach (GameObject laser in lasers)
+        {
+            var laserParticleSystem = laser.GetComponent<ParticleSystem>().emission;
+            laserParticleSystem.enabled = state;
+        }
+    }
+
     void HandleRotation()
     {
-        float pitch = transform.localRotation.y * positionPitchFactor + yThrow * controlPitchFactor;
-        float yaw = transform.localRotation.x * controlYawFactor;
-        float roll = transform.localRotation.z + xThrow * controlRollFactor;
+        float pitchDuetoPosition = transform.localPosition.y * -positionPitchFactor;
+        float pitchDueToControlThrow = -yThrow * controlPitchFactor;
+        float pitch = pitchDuetoPosition + pitchDueToControlThrow;
 
-        transform.localRotation = Quaternion.Euler(pitch, yaw, roll);
+        float yaw = transform.localPosition.x * positionYawFactor;
+
+        float roll = xThrow * -controlRollFactor;
+
+        Quaternion targetRotation = Quaternion.Euler(pitch, yaw, roll);
+        transform.localRotation = Quaternion.RotateTowards(transform.localRotation, targetRotation, rotationFactor);
     }
 
     void HandleMovement()

@@ -486,6 +486,9 @@ MonoBehaviour:
   controlPitchFactor: -15
   controlRollFactor: -12
   controlYawFactor: -5
+  lasers:
+  - {fileID: 5828654106509629612}
+  - {fileID: 6506683316983927003}
 --- !u!1 &6984009920316880457
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,6 +633,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7225d53ea1feea4d8992dc11fc3665c, type: 3}
+--- !u!1 &5828654106509629612 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5947983734393729030, guid: c7225d53ea1feea4d8992dc11fc3665c, type: 3}
+  m_PrefabInstance: {fileID: 173654349966616746}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7715532473670127687 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7600917637554469101, guid: c7225d53ea1feea4d8992dc11fc3665c, type: 3}
@@ -692,6 +700,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7225d53ea1feea4d8992dc11fc3665c, type: 3}
+--- !u!1 &6506683316983927003 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5947983734393729030, guid: c7225d53ea1feea4d8992dc11fc3665c, type: 3}
+  m_PrefabInstance: {fileID: 632502524638617821}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7042780856891480112 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7600917637554469101, guid: c7225d53ea1feea4d8992dc11fc3665c, type: 3}
