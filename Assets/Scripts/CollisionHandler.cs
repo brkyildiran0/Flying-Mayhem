@@ -13,15 +13,12 @@ public class CollisionHandler : MonoBehaviour
         CrashAndRestart();
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        
-    }
-
     void CrashAndRestart()
     {
-        explosionEffectObject.GetComponent<ParticleSystem>().Play();
-        GetComponentInParent<PlayerMovement>().enabled = false;
+        explosionEffectObject.GetComponent<ParticleSystem>().Play();    //Play particles
+        GetComponentInParent<PlayerMovement>().enabled = false;         //Disable inputs
+        ScoreBoard.playerScore = 0;                                     //Reset player score
+
         DisableMeshRenderers();
         Invoke("ReloadLevel", levelLoadDelay);
     }
