@@ -1,17 +1,17 @@
-using System;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Position Parameters")]
     [SerializeField] float controlSpeed = 10f;
     [SerializeField] float xRange = 7f;
     [SerializeField] float yRange = 5f;
 
+    [Header("Rotation Parameters")]
     [SerializeField] float positionPitchFactor = 3f;
     [SerializeField] float positionYawFactor = 3f;
     [SerializeField] float controlPitchFactor = 15f;
     [SerializeField] float controlRollFactor = 2f;
-    [SerializeField] float controlYawFactor = 5f;
     [SerializeField] float rotationFactor = 3f;
 
     [SerializeField] GameObject[] lasers;
