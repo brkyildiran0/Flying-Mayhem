@@ -1,14 +1,42 @@
+using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
+    [SerializeField] float levelLoadDelay = 1.0f;
+    [SerializeField] GameObject explosionEffectObject;
+    [SerializeField] MeshRenderer[] shipParts;
+
     void OnCollisionEnter(Collision other)
     {
-        print(this.name + "--- collided with ---" + other.gameObject.name);
+        CrashAndRestart();
     }
 
     void OnTriggerEnter(Collider other)
     {
-        print(this.name + "--- triggered with ---" + other.gameObject.name);
+        
+    }
+
+    void CrashAndRestart()
+    {
+        explosionEffectObject.GetComponent<ParticleSystem>().Play();
+        GetComponentInParent<PlayerMovement>().enabled = false;
+        DisableMeshRenderers();
+        Invoke("ReloadLevel", levelLoadDelay);
+    }
+
+    void ReloadLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    void DisableMeshRenderers()
+    {
+        foreach (MeshRenderer mr in shipParts)
+        {
+            mr.enabled = false;
+        }
     }
 }
+
