@@ -4,14 +4,29 @@ public class EnemyHandler : MonoBehaviour
 {
     [SerializeField] GameObject deathVFX;
     [SerializeField] GameObject mainParent;
-    [SerializeField] int scoreByDestroying = 1;
+    [SerializeField] int health;
+    [SerializeField] int scoreByHitting;
+
+    void Awake()
+    {
+        health = Random.Range(1, 6);
+        scoreByHitting = 1;
+    }
 
     void OnParticleCollision(GameObject other)
     {
-        GameObject vfx = Instantiate(deathVFX, transform.position, Quaternion.identity);
-        vfx.transform.parent = mainParent.transform;
-        gameObject.SetActive(false);
+        health--;
+        if (health == 0)
+        {
+            GameObject vfx = Instantiate(deathVFX, transform.position, Quaternion.identity);
+            vfx.transform.parent = mainParent.transform;
+            gameObject.SetActive(false);
 
-        ScoreBoard.increaseScore(scoreByDestroying);
+            ScoreBoard.increaseScore(scoreByHitting);
+        }
+        else
+        {
+            ScoreBoard.increaseScore(scoreByHitting);
+        }   
     }
 }

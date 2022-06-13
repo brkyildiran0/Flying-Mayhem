@@ -3,8 +3,7 @@ using TMPro;
 
 public class ScoreBoard : MonoBehaviour
 {
-    [SerializeField] static public int playerScore  = 0;
-
+    static public int playerScore = 0;
     TextMeshProUGUI tmp;
 
     void Awake()
